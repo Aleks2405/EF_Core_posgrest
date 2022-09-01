@@ -36,14 +36,13 @@ namespace EF_Core_posgrest
             InitializeComponent();   
          
         }
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private async void button1_Click(object sender, RoutedEventArgs e)
         {
              var idTables = int.Parse(texbox.Text);
             using (var db = new ApplicationContext())
             {
-                db.Student.AddRange(new Students() { Id = idTables, Name = texbox1.Text, DataPosechenia = textbox4.Text });
-                db.SaveChanges();
-                db.Visiting.AddRange(new DateOfVisit() { Id = idTables, Visit = texbox2.Text, IdKey = idTables });
+                await db.Student.AddAsync(new Students() { Id = idTables, Name = texbox1.Text, DataPosechenia = textbox4.Text });
+                await db.Visiting.AddAsync(new DateOfVisit() { Id = idTables, Visit = texbox2.Text, IdKey = idTables });
                 db.SaveChanges();
                 MessageBox.Show($"Информация успешно добавлена");
             }
