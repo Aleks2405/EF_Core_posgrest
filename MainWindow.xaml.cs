@@ -39,10 +39,11 @@ namespace EF_Core_posgrest
         private async void button1_Click(object sender, RoutedEventArgs e)
         {
              var idTables = int.Parse(texbox.Text);
+             
             using (var db = new ApplicationContext())
             {
-                await db.Student.AddAsync(new Students() { Id = idTables, Name = texbox1.Text, DataPosechenia = textbox4.Text });
-                await db.Visiting.AddAsync(new DateOfVisit() { Id = idTables, Visit = texbox2.Text, IdKey = idTables });
+                await db.Student.AddAsync(new Students() { Id = Guid.NewGuid(), Name = texbox1.Text, DataPosechenia = textbox4.Text });
+                await db.Visiting.AddAsync(new DateOfVisit() { Id = Guid.NewGuid(), Visit = texbox2.Text, IdKey = idTables });
                 db.SaveChanges();
                 MessageBox.Show($"Информация успешно добавлена");
             }
@@ -57,20 +58,20 @@ namespace EF_Core_posgrest
         }
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var itog = db.Visiting.Join(db.Student, 
-                        u => u.IdKey, 
-                        c => c.Id,          
-                        (u,c) => new 
-                        {
-                            Id = u.Id,
-                            Name = c.Name,
-                            DataPosechenia = c.DataPosechenia,
-                            Visit = u.Visit
-                        }).ToList();
-                datagrid.ItemsSource = itog;
-            }
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    var itog = db.Visiting.Join(db.Student, 
+            //            u => u.IdKey, 
+            //            c => c.Id,          
+            //            (u,c) => new 
+            //            {
+            //                Id = u.Id,
+            //                Name = c.Name,
+            //                DataPosechenia = c.DataPosechenia,
+            //                Visit = u.Visit
+            //            }).ToList();
+            //    datagrid.ItemsSource = itog;
+            //}
         }
         private void button4_Click(object sender, RoutedEventArgs e)
         {

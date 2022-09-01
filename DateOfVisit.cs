@@ -8,7 +8,7 @@ namespace EF_Core_posgrest
 {
     public class DateOfVisit
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Visit { get; set; }
         public int IdKey { get; set; }
     }
