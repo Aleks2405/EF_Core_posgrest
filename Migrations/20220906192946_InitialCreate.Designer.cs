@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EF_Core_posgrest.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220901182657_InitialCreate")]
+    [Migration("20220906192946_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,8 @@ namespace EF_Core_posgrest.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("IdKey")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("IdKey")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Visit")
                         .IsRequired()
@@ -42,7 +42,7 @@ namespace EF_Core_posgrest.Migrations
                     b.ToTable("Visiting");
                 });
 
-            modelBuilder.Entity("EF_Core_posgrest.Students", b =>
+            modelBuilder.Entity("EF_Core_posgrest.Student", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace EF_Core_posgrest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Students");
                 });
 #pragma warning restore 612, 618
         }

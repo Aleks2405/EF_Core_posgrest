@@ -3,6 +3,7 @@ using System;
 using EF_Core_posgrest;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EF_Core_posgrest.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220906210550_InitialCreate4")]
+    partial class InitialCreate4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,13 @@ namespace EF_Core_posgrest.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("DisciplineId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("IdKey")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("VisionId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Visit")
@@ -36,6 +44,8 @@ namespace EF_Core_posgrest.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DisciplineId");
 
                     b.ToTable("Visiting");
                 });
@@ -65,30 +75,22 @@ namespace EF_Core_posgrest.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("DateOfVisitId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Discipline")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("IdKey")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DateOfVisitId");
 
                     b.ToTable("Disciplines");
                 });
 
-            modelBuilder.Entity("EF_Core_posgrest.TableOfDiscipline", b =>
+            modelBuilder.Entity("EF_Core_posgrest.DateOfVisit", b =>
                 {
-                    b.HasOne("EF_Core_posgrest.DateOfVisit", "DateOfVisit")
+                    b.HasOne("EF_Core_posgrest.TableOfDiscipline", "Discipline")
                         .WithMany()
-                        .HasForeignKey("DateOfVisitId");
+                        .HasForeignKey("DisciplineId");
 
-                    b.Navigation("DateOfVisit");
+                    b.Navigation("Discipline");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EF_Core_posgrest
 {
-    public class Students
+    public class Student
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

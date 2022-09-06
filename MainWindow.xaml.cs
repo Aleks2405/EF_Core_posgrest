@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -15,14 +17,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
-//Задача: Создать удобное приложение учета посещаемости студентов с графическим интерфейсом.
-//1 Создайте проект WPF.OK
-//2 Добавьте к проекту EF Core с СУБД SQLite OK
-//3 Добавьте в БД таблицу со студентами и таблицу посещаемость OK
-//4 Выведите список всех студентов на форму  OK
-//5 Добавьте возможность добавлять новых студентов в БД  Ok
-//6 Реализуйте отображение посещаемости студентов для выбранной даты
-//7 Добавьте возможность отмечать посещения студентов в приложении
+//1.Переделайте тип Id записей в таблице на Guid (выполнено)
+//2. Выполните первичную миграцию (Code First) (выполнено)
+//3.Добавьте в БД таблицу с дисциплинами (предметами) по Code First (выполнено)
+//4. Реализуйте функционал редактирования списка предметов (выполнено)
+//5. Добавьте возможность указывать предмет в таблице посещаемости студентов (пока достаточно только ID)
 
 namespace EF_Core_posgrest
 {
@@ -37,27 +36,34 @@ namespace EF_Core_posgrest
          
         }
         private async void button1_Click(object sender, RoutedEventArgs e)
-        {
-             var idTables = int.Parse(texbox.Text);
-             
+        {    
             using (var db = new ApplicationContext())
             {
-                await db.Student.AddAsync(new Students() { Id = Guid.NewGuid(), Name = texbox1.Text, DataPosechenia = textbox4.Text });
-                await db.Visiting.AddAsync(new DateOfVisit() { Id = Guid.NewGuid(), Visit = texbox2.Text, IdKey = idTables });
+                await db.Students.AddAsync(new Student() { Id = Guid.NewGuid(), Name = texbox1.Text, DataPosechenia = textbox4.Text });
+                await db.Visiting.AddAsync(new DateOfVisit() { Id = Guid.NewGuid(), Visit = texbox2.Text, IdKey = Guid.NewGuid() });
                 db.SaveChanges();
                 MessageBox.Show($"Информация успешно добавлена");
             }
         }
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private async void button2_Click(object sender, RoutedEventArgs e)
         {
            using (ApplicationContext db = new ApplicationContext())
-           {               
-                var students = db.Student.ToList();
-                datagrid.ItemsSource = students;
+           {
+                var list = await db.Disciplines.Include(it => it.DateOfVisit).ToListAsync();
+                datagrid.ItemsSource = list; 
             }
+
         }
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private async void button3_Click(object sender, RoutedEventArgs e)
         {
+            using (var db = new ApplicationContext())
+            {
+                await db.Disciplines.AddAsync(new TableOfDiscipline() { Id = Guid.NewGuid(), Discipline= texbox.Text });
+                db.SaveChanges();
+                MessageBox.Show($"Информация успешно добавлена");
+            }
+
+
             //using (ApplicationContext db = new ApplicationContext())
             //{
             //    var itog = db.Visiting.Join(db.Student, 
@@ -79,6 +85,8 @@ namespace EF_Core_posgrest
             texbox1.Text = null;
             texbox2.Text=null;
             textbox4.Text = null;          
-        }      
+        }
+
+       
     }
 }

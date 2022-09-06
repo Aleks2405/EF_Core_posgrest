@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace EF_Core_posgrest
 {
-    public class DateOfVisit
+    public class TableOfDiscipline
     {
         public Guid Id { get; set; }
-        public string Visit { get; set; }
+
+        public string Discipline { get; set; }
+
         public Guid IdKey { get; set; }
 
+        public DateOfVisit? DateOfVisit { get; set; }
        
+
     }
 }

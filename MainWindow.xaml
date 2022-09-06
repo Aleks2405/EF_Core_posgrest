@@ -10,12 +10,12 @@
         <Canvas Margin="588,465,262,215">
             <Button x:Name="button1" Content="Добавить информацию&#xA; о новых студентах" Click="button1_Click" Height="104" Canvas.Left="222" Width="146" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button x:Name="button2" Content="Информация о студентах" Width="150" Height="50" Click="button2_Click" Canvas.Left="218" Canvas.Top="-16" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Button x:Name="button3" Content="Информация&#xD;&#xA;посещения" Width="150" Height="50" Click="button3_Click" Canvas.Left="218" Canvas.Top="235" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="button3" Content="Добавить информацию &#xD;&#xA;о предметах&#xD;&#xA;" Width="150" Height="50" Click="button3_Click" Canvas.Left="218" Canvas.Top="235" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button x:Name="button4" Content="Очистить поля &#xD;&#xA;для заполнения" Width="150" Height="50" Canvas.Left="-6" Canvas.Top="235" HorizontalAlignment="Left" VerticalAlignment="Center" Click="button4_Click"/>
-            <TextBox x:Name="texbox" Height="33" Canvas.Left="140" Width="54" Canvas.Top="-355" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="texbox" Height="32" Canvas.Left="140" Width="54" Canvas.Top="-342" HorizontalAlignment="Center" VerticalAlignment="Top"  />
             <TextBox x:Name="texbox1" Height="33" Width="284" Canvas.Left="25" Canvas.Top="-291" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBox x:Name="texbox2" Height="33" Width="138" Canvas.Left="98" Canvas.Top="-188" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Label Content="ID" Width="50" Height="27"  Canvas.Left="-93" Canvas.Top="-356" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Предмет" Width="50" Height="27"  Canvas.Left="-93" Canvas.Top="-356" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Имя студента" Width="100" Height="27" Canvas.Left="-118" Canvas.Top="-292" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Посещение студента" Width="132" Height="27" Canvas.Left="-134" Canvas.Top="-189" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="textbox4"  Width="100" Height="33" Canvas.Left="117" Canvas.Top="-96" HorizontalAlignment="Center" VerticalAlignment="Center" />
